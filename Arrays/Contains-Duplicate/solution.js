@@ -7,21 +7,35 @@
 function containsDuplicateBruteForce(nums) {
     // TODO: Implement brute force solution
     // Hint: Check every pair of elements
-    
+    for (let i = 0; i < nums.length; i++) {
+        for (let j = i + 1; j < nums.length; j++) {
+            if (nums[i] === nums[j]) {
+                return true
+            }
+        }
+    }
+    return false
 }
 
 // Approach 2: Sorting
 function containsDuplicateSorting(nums) {
     // TODO: Implement sorting approach
     // Hint: Sort first, then check adjacent elements
-    
+
 }
 
 // Approach 3: Hash Set (Optimal)
 function containsDuplicate(nums) {
     // TODO: Implement hash set solution
     // Hint: Use Set to track seen elements
-    
+    const mySet = new Set();
+    for (let i = 0; i < nums.length; i++) {
+        if (mySet.has(nums[i])) {
+            return true;
+        }
+        mySet.add(nums[i])
+    }
+    return false
 }
 
 // Test cases
