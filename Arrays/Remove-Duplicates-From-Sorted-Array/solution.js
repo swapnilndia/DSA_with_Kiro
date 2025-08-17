@@ -7,14 +7,24 @@
 function removeDuplicatesExtraArray(nums) {
     // TODO: Implement using extra array
     // Hint: Create new array with unique elements, then copy back
-    
+
 }
 
 // Approach 2: Two Pointers (Optimal)
 function removeDuplicates(nums) {
     // TODO: Implement two pointers solution
     // Hint: Use one pointer for unique position, another to iterate
-    
+    if(nums.length < 2) return nums.length;
+    let write = 0;
+    let previous = nums[0];
+    for (let scan = 1; scan < nums.length; scan++) {
+        if (previous !== nums[scan]) {
+            write++;
+            nums[write] = nums[scan];
+            previous = nums[scan]
+        }
+    }
+    return ++write;
 }
 
 // Test cases
@@ -32,17 +42,17 @@ const testCases = [
 testCases.forEach((test, index) => {
     console.log(`Test Case ${index + 1}:`);
     console.log(`Input: nums = [${test.nums}]`);
-    
+
     // Test extra array approach
     let nums1 = [...test.nums];
     let result1 = removeDuplicatesExtraArray(nums1);
     console.log(`Extra Array: k = ${result1}, nums = [${nums1.slice(0, result1)}]`);
-    
+
     // Test two pointers approach
     let nums2 = [...test.nums];
     let result2 = removeDuplicates(nums2);
     console.log(`Two Pointers: k = ${result2}, nums = [${nums2.slice(0, result2)}]`);
-    
+
     console.log(`Expected: k = ${test.expected}, nums = [${test.expectedArray}]\n`);
 });
 
