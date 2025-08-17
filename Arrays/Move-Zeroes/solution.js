@@ -11,14 +11,42 @@
 function moveZeroesExtraArray(nums) {
     // TODO: Implement using extra array (for learning)
     // Hint: Create new array, add non-zeros first, then zeros
-    
+    const newArr = [];
+
+    // Add all non-zero elements first
+    for (let i = 0; i < nums.length; i++) {
+        if (nums[i] !== 0) {  // Fixed: was > 0, now !== 0
+            newArr.push(nums[i]);
+        }
+    }
+
+    // Add zeros to fill remaining positions
+    while (newArr.length < nums.length) {
+        newArr.push(0);
+    }
+
+    // Copy back to original array (to simulate in-place)
+    for (let i = 0; i < nums.length; i++) {
+        nums[i] = newArr[i];
+    }
 }
 
 // Approach 2: Two Pointers (Optimal)
 function moveZeroes(nums) {
     // TODO: Implement two pointers solution
     // Hint: Use one pointer for non-zero position, another to iterate
-    
+    let prevNonZeroIndex = 0;
+    for (let scan = 0; scan < nums.length; scan++) {
+        if (nums[scan] !== 0) {
+            nums[prevNonZeroIndex] = nums[scan];
+            prevNonZeroIndex++
+        }
+    }
+    while (prevNonZeroIndex < nums.length) {
+        nums[prevNonZeroIndex++] = 0;
+    }
+    return nums
+
 }
 
 // Test cases
@@ -36,17 +64,17 @@ const testCases = [
 testCases.forEach((test, index) => {
     console.log(`Test Case ${index + 1}:`);
     console.log(`Input: nums = [${test.nums}]`);
-    
+
     // Test extra array approach
     let nums1 = [...test.nums];
     moveZeroesExtraArray(nums1);
     console.log(`Extra Array: [${nums1}]`);
-    
+
     // Test two pointers approach
     let nums2 = [...test.nums];
     moveZeroes(nums2);
     console.log(`Two Pointers: [${nums2}]`);
-    
+
     console.log(`Expected: [${test.expected}]\n`);
 });
 
